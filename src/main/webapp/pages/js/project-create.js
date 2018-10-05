@@ -91,6 +91,7 @@ app.controller('projectCECtrl', function($scope) {
     }
 
     function getProjectInfo(companyId, id) {
+
         var callBackFun = function (data) {
             if (data) {
                 $scope.project = data;
@@ -115,30 +116,120 @@ app.controller('projectCECtrl', function($scope) {
         httpSyncPost(api.project.get, {companyId: companyId, id: id}, callBackFun);
     }
     $scope.projectCreate = function() {
-        //ng-model无法取到该值
-        $scope.project.startDate = $("#startDate").val();
-        $scope.project.endDate = $("#endDate").val();
-        $scope.project.status = "run";
-        var projectInfo  = JSON.stringify($scope.project);
-        httpSyncPost(api.project.create, {"projectInfo": projectInfo}, function(data){
-            if (data) {
-                alert("suc");
-            }
-        });
+        var name = $('#name').val();
+        var department = $('#department').val();
+        var owner = $('#owner').val();
+        var persons = $('#persons').val();
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var status = $('#status').val();
+        var flag = true;
+        if($.isEmptyObject(name)){
+            alert("名称不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(department)){
+            alert("上级部门不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(owner)){
+            alert("主管不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(persons)){
+            alert("人员不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(startDate)){
+            alert("开始日期不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(endDate)){
+            alert("结束日期不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(status)){
+            alert("状态不能为空！");
+            flag = false;
+            return false;
+        }
+        if(flag == true){
+            //ng-model无法取到该值
+            $scope.project.startDate = $("#startDate").val();
+            $scope.project.endDate = $("#endDate").val();
+            $scope.project.status = "run";
+            var projectInfo  = JSON.stringify($scope.project);
+            httpSyncPost(api.project.create, {"projectInfo": projectInfo}, function(data){
+                if (data) {
+                    alert("suc");
+                }
+            });
+        }
     };
 
     $scope.projectUpdate = function() {
-        //ng-model无法取到该值
-        $scope.project.startDate = $("#startDate").val();
-        $scope.project.endDate = $("#endDate").val();
-        var projectInfo  = JSON.stringify($scope.project);
-        httpSyncPost(api.project.update, {"projectInfo": projectInfo}, function(data){
-            if (data) {
-                alert("创建项目成功！");
-            } else {
-                alert("创建项目失败！");
-            }
-        });
-        return false;
+        var name = $('#name').val();
+        var department = $('#department').val();
+        var owner = $('#owner').val();
+        var persons = $('#persons').val();
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var status = $('#status').val();
+        var flag = true;
+        if($.isEmptyObject(name)){
+            alert("名称不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(department)){
+            alert("上级部门不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(owner)){
+            alert("主管不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(persons)){
+            alert("人员不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(startDate)){
+            alert("开始日期不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(endDate)){
+            alert("结束日期不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(status)){
+            alert("状态不能为空！");
+            flag = false;
+            return false;
+        }
+        if(flag == true){
+            //ng-model无法取到该值
+            $scope.project.startDate = $("#startDate").val();
+            $scope.project.endDate = $("#endDate").val();
+            var projectInfo  = JSON.stringify($scope.project);
+            httpSyncPost(api.project.update, {"projectInfo": projectInfo}, function(data){
+                if (data) {
+                    alert("创建项目成功！");
+                } else {
+                    alert("创建项目失败！");
+                }
+            });
+            return false;
+        }
     };
 });

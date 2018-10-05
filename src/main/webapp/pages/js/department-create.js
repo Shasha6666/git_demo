@@ -46,10 +46,23 @@ app.controller('DepartmentCCtrl', function($scope) {
         //废弃部长选择
         var ownerId = "0";//$('#ownerSelect').val();
         var introduce = $('#introduce').val();
+        var flag = true;
         if ($.isEmptyObject(name)) {
             alert("部门名称不能为空！");
+            flag = fasle;
             return false;
-        } else {
+        }
+        if($.isEmptyObject(parentId)){
+            alert("上级部门不能为空！");
+            flag = false;
+            return false;
+        }
+        if($.isEmptyObject(introduce)){
+            alert("简介不能为空！");
+            flag = false;
+            return false;
+        }
+        if(flag == true) {
             $.post("/adminManage/department/create", {
                     "name": name,
                     "description": introduce,
